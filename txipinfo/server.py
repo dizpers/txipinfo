@@ -8,6 +8,7 @@ from twisted.internet import utils
 from twisted.internet.defer import inlineCallbacks, returnValue
 
 from twisted.names import client
+from twisted.names.error import DomainError
 
 from twisted.python.filepath import FilePath
 
@@ -61,14 +62,20 @@ class HistoryElement(Element):
 @inlineCallbacks
 def get_result_for(ip):
     reversed_name = '.'.join(reversed(ip.split('.'))) + '.in-addr.arpa'
-    # you can simulate latency with
-    # answers, _, _ = yield task.deferLater(reactor, 10.0, client.lookupPointer, reversed_name)
-    # TODO: handle errors
-    answers, _, _ = yield client.lookupPointer(reversed_name)
-    ptr = str(answers[0].payload) if answers else ''
-    # TODO: handle errors (no such command? we're on windows? anything else?)
+    try:
+        # you can simulate latency with
+        # answers, _, _ = yield task.deferLater(reactor, 10.0, client.lookupPointer, reversed_name)
+        answers, _, _ = yield client.lookupPointer(reversed_name)
+    except DomainError:
+        ptr = 'No domain or other error'
+    else:
+        ptr = str(answers[0].payload) if answers else ''
+
+    # TODO: handle errors?
     whois = yield utils.getProcessOutput('whois', (ip,))
+
     datetime_str = datetime.utcnow().strftime(DATETIME_FORMAT)
+
     returnValue((ip, ptr, whois, datetime_str))
 
 

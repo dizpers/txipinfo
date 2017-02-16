@@ -10,7 +10,8 @@ RUN apt-get -y install \
 #    libssl-dev \
     python \
     python-dev \
-    python-pip
+    python-pip \
+    whois
 
 COPY . /app
 WORKDIR /app
