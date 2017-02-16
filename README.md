@@ -42,6 +42,18 @@ files or DB are allowed. After termination of the application - a history is los
 
 Bonus points for ability to run with Vagrant or Docker.
 
+### Installation and run
+
+Please, follow these steps:
+
+```
+git clone git@github.com:dizpers/txipinfo.git
+cd txipinfo/txipinfo
+docker-compose up -d
+```
+
+After the last command will execute - you'll be able to access the web interface on http://127.0.0.1/.
+
 ## RU
 
 ### Интро
@@ -78,3 +90,15 @@ Bonus points for ability to run with Vagrant or Docker.
 памяти приложения. Никаких файлов и БД использовать нельзя. После завершения процесса приложения история теряется.
 
 Будет плюсом возможность запуска в Vagrant и Docker.
+
+### Установка и запуск
+
+Для запуска продукта используйте следующий набор команд:
+
+```
+git clone git@github.com:dizpers/txipinfo.git
+cd txipinfo/txipinfo
+docker-compose up -d
+```
+
+После окончания работы последней команды, вы можете начать использовать web интерфейс по адресу http://127.0.0.1/.
