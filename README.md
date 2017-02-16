@@ -58,10 +58,10 @@ After the last command will execute - you'll be able to access the web interface
 
 There's something to do more:
 
-1) handle more errors;
-2) implement whois client (instead of using linux command);
-3) make clientside interactive (single page application);
-4) use more convenient template engine (Jinja? remember about blocking). 
+1. handle more errors;
+2. implement whois client (instead of using linux command);
+3. make clientside interactive (single page application);
+4. use more convenient template engine (Jinja? remember about blocking). 
 
 ## RU
 
@@ -116,7 +116,7 @@ docker-compose up -d
 
 Список возможных улучшений:
 
-1) обрабатывать больше ошибок;
-2) реализовать whois клиент (вместо использования одноименной linux команды);
-3) сделать клиентсайд интерактивным (одностраничное приложение);
-4) использовать более удобный шаблонизатор (jinja? помнить про блокировки).
+1. обрабатывать больше ошибок;
+2. реализовать whois клиент (вместо использования одноименной linux команды);
+3. сделать клиентсайд интерактивным (одностраничное приложение);
+4. использовать более удобный шаблонизатор (jinja? помнить про блокировки).
