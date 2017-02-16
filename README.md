@@ -54,6 +54,13 @@ docker-compose up -d
 
 After the last command will execute - you'll be able to access the web interface on http://127.0.0.1/.
 
+To run without docker (e.g., during development) you can use following command (**assuming you're at the project root
+directory**):
+
+```
+env PYTHONPATH=. twistd -n web --class=txipinfo.server.resource
+```
+
 ### TODO
 
 There's something to do more:
@@ -111,6 +118,13 @@ docker-compose up -d
 ```
 
 После окончания работы последней команды, вы можете начать использовать web интерфейс по адресу http://127.0.0.1/.
+
+Для запуска вне контейнера (например, в ходе разработки) используйте следующую команду (**находясь в корневой папке
+проекта**):
+
+```
+env PYTHONPATH=. twistd -n web --class=txipinfo.server.resource
+```
 
 ### TODO
 
