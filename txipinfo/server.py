@@ -11,8 +11,6 @@ app = Klein()
 # TODO: maybe use non-global state by encapsulating router handlers in class?
 # history - the list of records (tuples), each of them consists of 4 elements (ip, ptr, whois, datetime)
 history = []
-# queue - the list of deferred objects
-queue = []
 
 
 class IndexElement(Element):
