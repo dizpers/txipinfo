@@ -1,3 +1,4 @@
+from datetime import datetime
 import ipaddress
 
 from klein import Klein
@@ -5,6 +6,8 @@ from klein import Klein
 from twisted.internet.defer import succeed, Deferred
 from twisted.web.template import XMLFile, Element, renderer
 from twisted.python.filepath import FilePath
+
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S +0000'
 
 app = Klein()
 
@@ -49,7 +52,10 @@ class HistoryElement(Element):
 
 def get_result_for(ip):
     d = Deferred()
-    d.callback((ip, ip, ip, ip))
+    ptr = ''
+    whois = ''
+    datetime_str = datetime.utcnow().strftime(DATETIME_FORMAT)
+    d.callback((ip, ptr, whois, datetime_str))
     return d
 
 
