@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:t="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>IP Info</title>
+</head>
+<body xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+    <table>
+        <thead>
+            <tr>
+                <th>IPv4</th>
+                <th>PTR</th>
+                <th>Whois</th>
+                <th>Date Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr t:render="record">
+                <td><t:slot name="ip"/></td>
+                <td><t:slot name="ptr"/></td>
+                <td><t:slot name="whois"/></td>
+                <td><t:slot name="datetime"/></td>
+            </tr>
+        </tbody>
+    </table>
+    <form method="POST">
+        <input type="submit" value="Clean up the history"/>
+    </form>
+</body>
+</html>

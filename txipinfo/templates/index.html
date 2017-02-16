@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:t="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>IP Info</title>
+</head>
+<body xmlns:t="http://twistedmatrix.com/ns/twisted.web.template/0.1">
+    <form method="POST">
+        <input name="ip" type="text"/>
+        <input type="submit"/>
+    </form>
+    <h1 t:render="message" />
+</body>
+</html>
