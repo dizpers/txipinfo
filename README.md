@@ -1,4 +1,4 @@
-# IP info (docs WIP)
+# IP info
 
 Dockerized Twisted application to get DNS and whois infor by IP address. Please, see task description below (ENglish
 and RUssian version).
