@@ -1,25 +1,32 @@
+import ipaddress
+
 from klein import Klein
 
-from twisted.web.static import File
-from twisted.internet.defer import succeed
+from twisted.internet.defer import succeed, Deferred
 from twisted.web.template import XMLFile, Element, renderer
 from twisted.python.filepath import FilePath
 
 app = Klein()
 
 # TODO: maybe use non-global state by encapsulating router handlers in class?
+# history - the list of records (tuples), each of them consists of 4 elements (ip, ptr, whois, datetime)
 history = []
+# queue - the list of deferred objects
+queue = []
 
 
 class IndexElement(Element):
 
     loader = XMLFile(FilePath('templates/index.html'))
 
+    def __init__(self, message):
+        super(IndexElement, self).__init__(self.loader)
+        self._message = message
+
     @renderer
     def message(self, request, tag):
         if request.method == 'POST':
-            # TODO: return when we scheduled the task
-            return tag('Message')
+            return tag(self._message)
         return ''
 
 
@@ -42,9 +49,29 @@ class HistoryElement(Element):
             )
 
 
+def get_result_for(ip):
+    d = Deferred()
+    d.callback((ip, ip, ip, ip))
+    return d
+
+
 @app.route('/')
 def index(request):
-    return IndexElement()
+    message = 'IP successfully queued for processing'
+    if request.method == 'POST':
+        try:
+            ip = request.args.get('ip')[0]
+            ip = unicode(ip)
+            if not isinstance(ipaddress.ip_address(ip), ipaddress.IPv4Address):
+                raise ValueError
+        except TypeError:
+            message = 'No IP provided'
+        except ValueError:
+            message = 'IP is invalid'
+        else:
+            d = get_result_for(ip)
+            d.addCallback(history.append)
+    return IndexElement(message)
 
 
 @app.route('/history', methods=('GET', 'POST'))
